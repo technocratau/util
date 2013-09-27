@@ -26,7 +26,6 @@ On mac, the recommended way to install rbenv is using homebrew as follows. For a
 brew update
 brew install rbenv
 brew install ruby-build
-echo -e 'export RBENV_ROOT=/usr/local/var/rbenv\nif which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
 exec $SHELL -l
 ```
 

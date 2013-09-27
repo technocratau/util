@@ -1,1 +1,22 @@
+if [ -z `which rbenv` ]
+then
+  echo 'rbenv is not installed. Please install it and then try again.'
+  exit 1
+fi
+
+if [ -z "$RBENV_ROOT" ]
+then
+  # This is the default on Mac OSX when installed with homebrew.
+  export RBENV_ROOT='/usr/local/var/rbenv'
+fi
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+if [ ! -d "$RBENV_ROOT/shims" ]
+then
+  echo "$RBENV_ROOT/shims is not a directory. Please make sure rbenv is installed correctly."
+  exit 1
+fi
+
 PATH=`dirname $BASH_SOURCE`/bundler-gem-aliases:$PATH
+
