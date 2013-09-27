@@ -40,6 +40,8 @@ rbenv rehash
 exec $SHELL -l
 ```
 
+Now you have a simple way to switch between different versions of ruby with ```rbenv local 1.9.3-p448```, however it won't usually be necessary to manually switch versions, since each project can specify a version to use for sass and compass.
+
 Install bundler
 ---------------
 Install the latest version of bundler as follows:
