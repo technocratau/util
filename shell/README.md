@@ -1,9 +1,16 @@
-Setting up rbenv and bundler
-----------------------------
+Setting up the Technocrat shell utilities
+=========================================
+To start making use of the included utilities simply clone this repo, and add the following to your `~/.bash_profile` file.
+```
+source /path/to/util/shell/bash_profile
+```
+For these shell utilities to work you must setup Rbenv and Bundler as explained below.
+
+Setting up Rbenv and Bundler
+============================
+Rbenv is a tool which allows you to have multiple versions of ruby installed on the same computer. Bundler is a tool for managing sets of gems for your projects.
  - rbenv https://github.com/sstephenson/rbenv
  - bundler http://bundler.io
-
-Rbenv is a tool which allows you to have multiple versions of ruby installed on the same computer. Bundler is a tool for managing sets of gems for your projects.
 
 Make sure rvm is not installed:
 -------------------------------
@@ -14,7 +21,7 @@ rvm implode
 
 Install rbenv
 -------------
-On mac, the recommended way to install rbenv is as follows. For alternative installation instructions see https://github.com/sstephenson/rbenv.
+On mac, the recommended way to install rbenv is using homebrew as follows. For alternative installation instructions see https://github.com/sstephenson/rbenv.
 ```
 brew update
 brew install rbenv
