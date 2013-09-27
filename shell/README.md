@@ -32,9 +32,9 @@ exec $SHELL -l
 
 Install ruby
 ------------
-Install a version of ruby as follows:
+You can see the current version of ruby with ```ruby -v```, or install a different version of ruby with:
 ```
-# You may want to install a different version.
+# Install a different version of ruby.
 rbenv install 1.9.3-p448
 rbenv rehash
 exec $SHELL -l
