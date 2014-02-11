@@ -1,0 +1,177 @@
+#!/bin/bash
+
+echo "This will push code to Acquia and Github."
+CURRENT=$(git symbolic-ref -q HEAD)
+CURRENT=${branch_name##refs/heads/}
+CURRENT=${branch_name:-HEAD}
+PS3="Choose a method:"
+select METHOD in "[merge]>push" "add>[push>merge]>push" exit
+do
+  case $METHOD in
+    "[merge]>push")
+      PS3="Choose which branch(es) to push to:"
+      select BRANCHES in "current" "develop from merged current" "develop" "master from merged develop" "master" exit
+      do
+        case $BRANCHES in
+          "current")
+            echo "Pushing $CURRENT to Acquia..."
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Github..."
+            git push github "$CURRENT"
+            echo "Done."
+            exit
+          ;;
+          "develop from merged current")
+            echo "Checking out develop..."
+            git checkout develop
+            echo "Merging $CURRENT..."
+            git merge "$CURRENT"
+            echo "Pushing develop to Acquia..."
+            git push origin develop
+            echo "Pushing develop to Github..."
+            git push github develop
+            echo "Done."
+            exit
+          ;;
+          "develop")
+            echo "Checking out develop..."
+            git checkout develop
+            echo "Pushing develop to Acquia..."
+            git push origin develop
+            echo "Pushing develop to Github..."
+            git push github develop
+            echo "Done."
+            exit
+          ;;
+          "master from merged develop")
+            echo "Checking out master..."
+            git checkout master
+            echo "Merging develop..."
+            git merge develop
+            echo "Pushing master to Acquia..."
+            git push origin master
+            echo "Pushing master to Github..."
+            git push github master
+            echo "Checking out develop branch..."
+            git checkout develop
+            echo "Done."
+            exit
+          ;;
+          "master")
+            echo "Checking out master..."
+            git checkout master
+            echo "Pushing master to Acquia..."
+            git push origin master
+            echo "Pushing master to Github..."
+            git push github master
+            echo "Checking out develop branch..."
+            git checkout develop
+            echo "Done."
+            exit
+          ;;
+          "exit")
+            exit
+          ;;
+        esac
+      done
+    ;;
+    "add>[push>merge]>push")
+      PS3="Choose which branch(es) to push to:"
+      select BRANCHES in "current" "current and develop from merged current" "develop" "develop and master from merged develop" exit
+      do
+        case $BRANCHES in
+          "current")
+            echo "Adding everything.."
+            git add -A
+            echo "Provide a commit message:"
+            read MESSAGE
+            echo "Added message: $MESSAGE"
+            echo "Committing..."
+            git commit -m "$MESSAGE"
+            echo "Pushing $CURRENT to Acquia..."
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Github..."
+            git push github "$CURRENT"
+            echo "Done."
+            exit
+          ;;
+          "current and develop from merged current")
+            echo "Adding everything.."
+            git add -A
+            echo "Provide a commit message:"
+            read MESSAGE
+            echo "Added message: $MESSAGE"
+            echo "Committing..."
+            git commit -m "$MESSAGE"
+            echo "Pushing $CURRENT to Acquia..."
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Github..."
+            git push github "$CURRENT"
+            echo "Checking out develop..."
+            git checkout develop
+            echo "Merging $CURRENT..."
+            git merge "$CURRENT"
+            echo "Pushing develop to Acquia..."
+            git push origin develop
+            echo "Pushing develop to Github..."
+            git push github develop
+            echo "Checking out develop branch..."
+            git checkout develop
+            echo "Done."
+            exit
+          ;;
+          "develop")
+            echo "Checking out develop..."
+            git checkout develop
+            echo "Adding everything.."
+            git add -A
+            echo "Provide a commit message:"
+            read MESSAGE
+            echo "Added message: $MESSAGE"
+            echo "Committing..."
+            git commit -m "$MESSAGE"
+            echo "Pushing develop to Acquia..."
+            git push origin develop
+            echo "Pushing develop to Github..."
+            git push github develop
+            echo "Done."
+            exit
+          ;;
+          "develop and master from merged develop")
+            echo "Checking out develop..."
+            git checkout develop
+            echo "Adding everything.."
+            git add -A
+            echo "Provide a commit message:"
+            read MESSAGE
+            echo "Added message: $MESSAGE"
+            echo "Committing..."
+            git commit -m "$MESSAGE"
+            echo "Pushing develop to Acquia..."
+            git push origin develop
+            echo "Pushing develop to Github..."
+            git push github develop
+            echo "Checking out master branch..."
+            git checkout master
+            echo "Merging develop branch..."
+            git merge develop
+            echo "Pushing master to Acquia..."
+            git push origin master
+            echo "Pushing master to Github..."
+            git push github master
+            echo "Checking out develop branch..."
+            git checkout develop
+            echo "Done."
+            exit
+          ;;
+          "exit")
+            exit
+          ;;
+        esac
+      done
+    ;;
+    "exit")
+      exit
+    ;;
+  esac
+done
