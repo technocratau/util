@@ -14,10 +14,10 @@ do
       do
         case $BRANCHES in
           "current")
-            echo "Pushing $CURRENT to Acquia..."
-            git push origin "$CURRENT"
             echo "Pushing $CURRENT to Github..."
-            git push github "$CURRENT"
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Acquia..."
+            git push acquia "$CURRENT"
             echo "Done."
             exit
           ;;
@@ -26,20 +26,20 @@ do
             git checkout develop
             echo "Merging $CURRENT..."
             git merge "$CURRENT"
-            echo "Pushing develop to Acquia..."
-            git push origin develop
             echo "Pushing develop to Github..."
-            git push github develop
+            git push origin develop
+            echo "Pushing develop to Acquia..."
+            git push acquia develop
             echo "Done."
             exit
           ;;
           "develop")
             echo "Checking out develop..."
             git checkout develop
-            echo "Pushing develop to Acquia..."
-            git push origin develop
             echo "Pushing develop to Github..."
-            git push github develop
+            git push origin develop
+            echo "Pushing develop to Acquia..."
+            git push acquia develop
             echo "Done."
             exit
           ;;
@@ -48,11 +48,11 @@ do
             git checkout master
             echo "Merging develop..."
             git merge develop
-            echo "Pushing master to Acquia..."
-            git push origin master
             echo "Pushing master to Github..."
-            git push github master
-            echo "Checking out develop branch..."
+            git push origin master
+            echo "Pushing master to Acquia..."
+            git push acquia master
+            echo "Checking out develop..."
             git checkout develop
             echo "Done."
             exit
@@ -60,11 +60,11 @@ do
           "master")
             echo "Checking out master..."
             git checkout master
-            echo "Pushing master to Acquia..."
-            git push origin master
             echo "Pushing master to Github..."
-            git push github master
-            echo "Checking out develop branch..."
+            git push origin master
+            echo "Pushing master to Acquia..."
+            git push acquia master
+            echo "Checking out develop..."
             git checkout develop
             echo "Done."
             exit
@@ -88,10 +88,10 @@ do
             echo "Added message: $MESSAGE"
             echo "Committing..."
             git commit -m "$MESSAGE"
-            echo "Pushing $CURRENT to Acquia..."
-            git push origin "$CURRENT"
             echo "Pushing $CURRENT to Github..."
-            git push github "$CURRENT"
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Acquia..."
+            git push acquia "$CURRENT"
             echo "Done."
             exit
           ;;
@@ -103,19 +103,19 @@ do
             echo "Added message: $MESSAGE"
             echo "Committing..."
             git commit -m "$MESSAGE"
-            echo "Pushing $CURRENT to Acquia..."
-            git push origin "$CURRENT"
             echo "Pushing $CURRENT to Github..."
-            git push github "$CURRENT"
+            git push origin "$CURRENT"
+            echo "Pushing $CURRENT to Acquia..."
+            git push acquia "$CURRENT"
             echo "Checking out develop..."
             git checkout develop
             echo "Merging $CURRENT..."
             git merge "$CURRENT"
-            echo "Pushing develop to Acquia..."
-            git push origin develop
             echo "Pushing develop to Github..."
-            git push github develop
-            echo "Checking out develop branch..."
+            git push origin develop
+            echo "Pushing develop to Acquia..."
+            git push acquia develop
+            echo "Checking out develop..."
             git checkout develop
             echo "Done."
             exit
@@ -130,10 +130,10 @@ do
             echo "Added message: $MESSAGE"
             echo "Committing..."
             git commit -m "$MESSAGE"
-            echo "Pushing develop to Acquia..."
-            git push origin develop
             echo "Pushing develop to Github..."
-            git push github develop
+            git push origin develop
+            echo "Pushing develop to Acquia..."
+            git push acquia develop
             echo "Done."
             exit
           ;;
@@ -147,19 +147,19 @@ do
             echo "Added message: $MESSAGE"
             echo "Committing..."
             git commit -m "$MESSAGE"
-            echo "Pushing develop to Acquia..."
-            git push origin develop
             echo "Pushing develop to Github..."
-            git push github develop
+            git push origin develop
+            echo "Pushing develop to Acquia..."
+            git push acquia develop
             echo "Checking out master branch..."
             git checkout master
-            echo "Merging develop branch..."
+            echo "Merging develop..."
             git merge develop
-            echo "Pushing master to Acquia..."
-            git push origin master
             echo "Pushing master to Github..."
-            git push github master
-            echo "Checking out develop branch..."
+            git push origin master
+            echo "Pushing master to Acquia..."
+            git push acquia master
+            echo "Checking out develop..."
             git checkout develop
             echo "Done."
             exit
